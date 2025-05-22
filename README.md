@@ -742,6 +742,7 @@ BaiduPCS-Py upload --max-workers 4 [OPTIONS] [LOCALPATHS]... REMOTEDIR
 | --no-ignore-existing, --NI                                 | 上传已经存在的文件                                                                         |
 | --no-show-progress, --NP                                   | 不显示上传进度                                                                             |
 | --check-md5, --CM                                          | 分段上传后检查 md5。注意检查上传后大文件的 md5，可能会花数分中（2G 的文件需要大约 5 分钟） |
+| --enable-rapid-upload, --R                                          | 启用秒传，默认启用（秒传API有变动，如果上传失败，请关闭秒传后在试） |
 
 ## 同步本地目录到远端
 

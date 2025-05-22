@@ -134,6 +134,7 @@ def upload(
     user_id: Optional[int] = None,
     user_name: Optional[str] = None,
     check_md5: bool = False,
+    enable_rapid_upload: bool = True,
 ):
     """Upload from_tos
 
@@ -175,6 +176,7 @@ def upload(
             user_id=user_id,
             user_name=user_name,
             check_md5=check_md5,
+            enable_rapid_upload=enable_rapid_upload,
         )
     elif upload_type == UploadType.Many:
         upload_many(
@@ -190,6 +192,7 @@ def upload(
             user_id=user_id,
             user_name=user_name,
             check_md5=check_md5,
+            enable_rapid_upload=enable_rapid_upload,
         )
 
 
@@ -335,6 +338,7 @@ def upload_one_by_one(
     user_id: Optional[int] = None,
     user_name: Optional[str] = None,
     check_md5: bool = False,
+    enable_rapid_upload: bool = True,
 ):
     """Upload files one by one with uploading the slices concurrently"""
 
@@ -355,6 +359,7 @@ def upload_one_by_one(
             user_id=user_id,
             user_name=user_name,
             check_md5=check_md5,
+            enable_rapid_upload=enable_rapid_upload,
         )
 
     logger.debug("======== Uploading end ========")
@@ -385,6 +390,7 @@ def upload_file_concurrently(
     user_id: Optional[int] = None,
     user_name: Optional[str] = None,
     check_md5: bool = False,
+    enable_rapid_upload: bool = True,
 ):
     """Uploading one file by uploading it's slices concurrently"""
 
@@ -421,7 +427,7 @@ def upload_file_concurrently(
     content_md5 = ""
     content_crc32 = 0
 
-    if encrypt_type == EncryptType.No and encrypt_io_len > 256 * constant.OneK:
+    if encrypt_type == EncryptType.No and encrypt_io_len > 256 * constant.OneK and enable_rapid_upload:
         # Rapid Upload
         slice256k_md5, content_md5, content_crc32, _ = rapid_upload_params(encrypt_io)
         ok = _rapid_upload(
@@ -560,6 +566,7 @@ def upload_many(
     user_id: Optional[int] = None,
     user_name: Optional[str] = None,
     check_md5: bool = False,
+    enable_rapid_upload: bool = True,
 ):
     """Upload files concurrently that one file is with one connection"""
 
@@ -590,6 +597,7 @@ def upload_many(
                 user_id=user_id,
                 user_name=user_name,
                 check_md5=check_md5,
+                enable_rapid_upload=enable_rapid_upload,
             )
             futs[fut] = from_to
 
@@ -638,6 +646,7 @@ def upload_file(
     user_id: Optional[int] = None,
     user_name: Optional[str] = None,
     check_md5: bool = False,
+    enable_rapid_upload: bool = True,
 ):
     """Upload one file with one connection"""
 
@@ -673,7 +682,7 @@ def upload_file(
     content_md5 = ""
     content_crc32 = 0
 
-    if encrypt_type == EncryptType.No and encrypt_io_len > 256 * constant.OneK:
+    if encrypt_type == EncryptType.No and encrypt_io_len > 256 * constant.OneK and enable_rapid_upload:
         # Rapid Upload
         slice256k_md5, content_md5, content_crc32, _ = rapid_upload_params(encrypt_io)
         ok = _rapid_upload(

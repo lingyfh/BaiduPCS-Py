@@ -1183,6 +1183,7 @@ def play(
     is_flag=True,
     help="分段上传后检查md5。注意检查上传后大文件的md5，可能会花数分中（2G 的文件需要大约5分钟）",
 )
+@click.option("--enable-rapid-upload", "--R", is_flag=True, help="启用秒传")
 @click.pass_context
 @handle_error
 @multi_user_do
@@ -1197,6 +1198,7 @@ def upload(
     no_ignore_existing,
     no_show_progress,
     check_md5,
+    enable_rapid_upload,
 ):
     """上传文件"""
 
@@ -1236,6 +1238,7 @@ def upload(
         user_id=user_id,
         user_name=user_name,
         check_md5=check_md5,
+        enable_rapid_upload=enable_rapid_upload,
     )
 
 
@@ -1258,6 +1261,7 @@ def upload(
     is_flag=True,
     help="分段上传后检查md5。注意检查上传后大文件的md5，可能会花数分中（2G 的文件需要大约5分钟）",
 )
+@click.option("--enable-rapid-upload", "--R", is_flag=True, help="启用秒传")
 @click.pass_context
 @handle_error
 @multi_user_do
@@ -1270,6 +1274,7 @@ def sync(
     max_workers,
     no_show_progress,
     check_md5,
+    enable_rapid_upload,
 ):
     """同步本地目录到远端"""
 
@@ -1303,6 +1308,7 @@ def sync(
         user_id=user_id,
         user_name=user_name,
         check_md5=check_md5,
+        enable_rapid_upload=enable_rapid_upload,
     )
 
 

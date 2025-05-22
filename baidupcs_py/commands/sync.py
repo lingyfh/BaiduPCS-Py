@@ -48,6 +48,7 @@ def sync(
     user_id: Optional[int] = None,
     user_name: Optional[str] = None,
     check_md5: bool = False,
+    enable_rapid_upload: bool = True,
 ):
     localdir = Path(localdir).as_posix()
     remotedir = Path(remotedir).as_posix()
@@ -119,6 +120,7 @@ def sync(
         user_id=user_id,
         user_name=user_name,
         check_md5=check_md5,
+        enable_rapid_upload=enable_rapid_upload,
     )
 
     if to_deletes:
