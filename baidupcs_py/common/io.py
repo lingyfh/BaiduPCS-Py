@@ -971,6 +971,10 @@ class AutoDecryptRequest:
 
         self._init()
 
+        if self._total_head_len == 0 and self._content_length == 0:
+            print(f"file size is 0, return 0")
+            return 0
+
         assert self._content_length
         return self._content_length - self._total_head_len
 
